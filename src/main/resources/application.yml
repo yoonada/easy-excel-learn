@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: easy-excel-learn
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:p6spy:mysql://localhost:3306/excel?characterEncoding=utf-8&autoReconnect=true&useSSL=false
+    username: root
+    password: DD123456aa
+  mvc:
+    path match:
+      matching-strategy: ant_path_matcher
+server:
+  port: 12345
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*.xml
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-field: is_delete
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+  configuration:
+    map-underscore-to-camel-case: true
+    call-setters-on-nulls: true
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+knife4j:
+  enable: true
+
