@@ -1,8 +1,13 @@
 package com.yoona.excel.logic.util;
 
+import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.excel.EasyExcel;
-import com.yoona.excel.common.dto.ExportExcelDTO;
+import com.alibaba.fastjson.JSON;
+import com.yoona.excel.common.exception.BusinessException;
+import com.yoona.excel.logic.domain.dto.ExportExcelDTO;
+import com.yoona.excel.logic.domain.dto.imports.BaseImportDTO;
+import com.yoona.excel.logic.listener.BaseImportListener;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,8 +18,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author YoonaDa
@@ -119,6 +123,37 @@ public class ExcelUtil {
                 .head(headers)
                 .sheet("sheet1")
                 .doWrite(new ArrayList<>());
+    }
+
+    /**
+     * 解析校验导入数据
+     *
+     * @param file
+     * @param baseClass
+     * @param headParseRowNumber 表头读取行数（第几行为表头的意思）：默认为1
+     * @throws Exception
+     */
+    public static List<BaseImportDTO> parseVerifyImportData(MultipartFile file, Class<?> baseClass, Integer headParseRowNumber) throws Exception {
+        if (Objects.isNull(headParseRowNumber)) {
+            headParseRowNumber = 1;
+        }
+        BaseImportListener importListener = new BaseImportListener();
+        EasyExcel.read(file.getInputStream(), baseClass, importListener)
+                // 第几行作为表头读取
+                .headRowNumber(headParseRowNumber)
+                .sheet()
+                .doRead();
+        List<Map<Integer, String>> headList = importListener.getHeadList();
+        if (CollectionUtil.isEmpty(headList)) {
+            throw new BusinessException("导入的Excel未包含表头");
+        }
+        log.info("headList：{}", JSON.toJSONString(headList));
+        List<BaseImportDTO> dataList = importListener.getDataList();
+        if (CollectionUtil.isEmpty(dataList)) {
+            throw new BusinessException("导入的Excel未包含数据");
+        }
+        log.info("Excel中包含的数据条数：{}，打印其中的一条：{}", dataList.size(), JSON.toJSONString(dataList.get(0)));
+        return dataList;
     }
 
 

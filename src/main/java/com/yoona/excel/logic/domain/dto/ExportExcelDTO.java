@@ -1,4 +1,4 @@
-package com.yoona.excel.common.dto;
+package com.yoona.excel.logic.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

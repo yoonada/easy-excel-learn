@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false">
+
+    <!--获取应用名-->
+    <springProperty scope="context" name="APP_NAME" source="spring.application.name"/>
+    <!--获取扫描mapper地址-->
+    <springProperty scope="context" name="MAPPER_SCAN" source="customize.mapper-scan"/>
+    <!--定义日志目录地址-->
+    <property name="LOG_HOME" value="./logs/${APP_NAME}" />
+
+    <!-- 彩色日志依赖的渲染类 -->
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />
+    <conversionRule conversionWord="wex" converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter" />
+    <conversionRule conversionWord="wEx" converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter" />
+    <!-- 彩色日志格式 -->
+    <property name="PATTERN" value="%date{yyyy-MM-dd HH:mm:ss} | %boldCyan([${APP_NAME}]) | %highlight(%-5level) | %boldYellow(%thread) | %boldMagenta(%X{TRACE_ID}) | %boldGreen(%logger:%line) | %msg%n"/>
+
+    <!--1. 输出到控制台-->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <!--此日志appender是为开发使用，只配置最低级别，控制台输出的日志级别是大于或等于此级别的日志信息-->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+        <encoder>
+            <Pattern>${PATTERN}</Pattern>
+            <!-- 设置字符集 -->
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+
+    <!-- 2. 输出到文件  -->
+    <!-- 时间滚动输出日志 -->
+    <appender name="LOG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 正在记录的日志文件的路径及文件名 -->
+        <file>${LOG_HOME}/${APP_NAME}.log</file>
+        <!--日志文档输出格式-->
+        <encoder>
+            <Pattern>${PATTERN}</Pattern>
+            <charset>UTF-8</charset> <!-- 此处设置字符集 -->
+        </encoder>
+        <!-- 日志记录器的滚动策略，按日期，按大小记录 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 每天日志归档路径以及格式 -->
+            <fileNamePattern>${LOG_HOME}/history/${APP_NAME}-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!--日志文件保留天数-->
+            <maxHistory>15</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <!--mybatis log configure-->
+    <logger name="org.springframework"  level="info" />
+    <Logger name="org.apache.http" level="info" />
+    <Logger name="org.apache.commons" level="info" />
+    <logger name="org.mybatis" level="info" />
+    <logger name="com.apache.ibatis" level="error"/>
+    <logger name="java.sql.Connection" level="error"/>
+    <logger name="java.sql.Statement" level="error"/>
+    <logger name="java.sql.PreparedStatement" level="error"/>
+    <logger name="com.baomidou.mybatisplus" level="debug"/>
+    <logger name="${MAPPER_SCAN}" level="debug" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="LOG_FILE"/>
+    </logger>
+
+    <!-- 日志输出级别 -->
+    <root level="info">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="LOG_FILE" />
+    </root>
+
+</configuration>
