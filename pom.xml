@@ -27,6 +27,7 @@
         <velocity.version>2.3</velocity.version>
         <pagehelper.version>1.2.5</pagehelper.version>
         <knife4j.version>2.0.9</knife4j.version>
+        <fastjson.version>1.2.79</fastjson.version>
     </properties>
 
     <dependencies>
@@ -126,6 +127,12 @@
             <groupId>org.apache.velocity</groupId>
             <artifactId>velocity-engine-core</artifactId>
             <version>${velocity.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
         </dependency>
 
     </dependencies>

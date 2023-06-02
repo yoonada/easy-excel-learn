@@ -33,7 +33,7 @@ public class ExcelUtil {
      */
     public static boolean verifyFileFormat(MultipartFile file) {
         String originalFilename = file.getOriginalFilename();
-        log.info("originalFilename:{}", originalFilename);
+        log.info("fileName：{}", originalFilename);
         if (StrUtil.isNotBlank(originalFilename)) {
             assert originalFilename != null;
             originalFilename = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
