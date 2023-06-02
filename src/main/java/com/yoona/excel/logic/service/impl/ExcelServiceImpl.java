@@ -1,6 +1,6 @@
 package com.yoona.excel.logic.service.impl;
 
-import com.yoona.excel.common.resp.BaseResponse;
+import com.yoona.excel.common.base.BaseResponse;
 import com.yoona.excel.logic.service.ExcelService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

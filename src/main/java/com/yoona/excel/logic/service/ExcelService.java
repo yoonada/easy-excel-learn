@@ -1,6 +1,6 @@
 package com.yoona.excel.logic.service;
 
-import com.yoona.excel.common.resp.BaseResponse;
+import com.yoona.excel.common.base.BaseResponse;
 import org.springframework.web.multipart.MultipartFile;
 
 /**

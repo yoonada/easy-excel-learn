@@ -3,7 +3,7 @@ spring:
     name: easy-excel-learn
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:p6spy:mysql://localhost:3306/excel?characterEncoding=utf-8&autoReconnect=true&useSSL=false
+    url: jdbc:mysql://localhost:3306/excel?characterEncoding=utf-8&autoReconnect=true&useSSL=false
     username: root
     password: DD123456aa
   mvc:

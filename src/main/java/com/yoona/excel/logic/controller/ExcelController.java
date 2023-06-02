@@ -2,7 +2,7 @@ package com.yoona.excel.logic.controller;
 
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.github.xiaoymin.knife4j.annotations.ApiSupport;
-import com.yoona.excel.common.resp.BaseResponse;
+import com.yoona.excel.common.base.BaseResponse;
 import com.yoona.excel.logic.service.ExcelService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

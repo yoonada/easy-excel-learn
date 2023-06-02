@@ -24,6 +24,7 @@
         <easyexcel.version>3.0.5</easyexcel.version>
         <mybatis-plus.version>3.4.1</mybatis-plus.version>
         <mybatis-plus-generator.version>3.4.1</mybatis-plus-generator.version>
+        <velocity.version>2.3</velocity.version>
         <pagehelper.version>1.2.5</pagehelper.version>
         <knife4j.version>2.0.9</knife4j.version>
     </properties>
@@ -85,10 +86,18 @@
             <version>${lombok.version}</version>
         </dependency>
 
+        <!--mybatis-plus-->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>${mybatis-plus.version}</version>
+        </dependency>
+
+        <!--mybatis-plus代码生成器-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
+            <version>${mybatis-plus-generator.version}</version>
         </dependency>
 
 <!--        <dependency>-->
@@ -111,6 +120,12 @@
             <groupId>com.github.xiaoymin</groupId>
             <artifactId>knife4j-spring-boot-starter</artifactId>
             <version>${knife4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity-engine-core</artifactId>
+            <version>${velocity.version}</version>
         </dependency>
 
     </dependencies>

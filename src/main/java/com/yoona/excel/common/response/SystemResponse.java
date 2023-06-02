@@ -1,5 +1,6 @@
-package com.yoona.excel.common.resp;
+package com.yoona.excel.common.response;
 
+import com.yoona.excel.common.base.BaseResponse;
 import com.yoona.excel.common.enums.ResponseEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

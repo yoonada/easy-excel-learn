@@ -1,4 +1,4 @@
-package com.yoona.excel.common.resp;
+package com.yoona.excel.common.base;
 
 import com.yoona.excel.common.enums.ResponseEnum;
 import com.yoona.excel.common.util.TimeStampUtil;
