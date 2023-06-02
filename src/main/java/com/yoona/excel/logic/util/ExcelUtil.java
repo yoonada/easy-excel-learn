@@ -126,14 +126,14 @@ public class ExcelUtil {
     }
 
     /**
-     * 解析校验导入数据
+     * 解析校验导入数据并返回数据列表
      *
      * @param file
      * @param baseClass
      * @param headParseRowNumber 表头读取行数（第几行为表头的意思）：默认为1
      * @throws Exception
      */
-    public static List<BaseImportDTO> parseVerifyImportData(MultipartFile file, Class<?> baseClass, Integer headParseRowNumber) throws Exception {
+    public static List<BaseImportDTO> parseVerifyImportDataReturnDataList(MultipartFile file, Class<?> baseClass, Integer headParseRowNumber) throws Exception {
         if (Objects.isNull(headParseRowNumber)) {
             headParseRowNumber = 1;
         }

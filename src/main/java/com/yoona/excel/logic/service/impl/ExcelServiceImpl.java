@@ -70,7 +70,7 @@ public class ExcelServiceImpl implements ExcelService {
         }
         List<BaseImportDTO> dataDTOList;
         try {
-            dataDTOList = ExcelUtil.parseVerifyImportData(file, TableOneImportDTO.class, 1);
+            dataDTOList = ExcelUtil.parseVerifyImportDataReturnDataList(file, TableOneImportDTO.class, 1);
         } catch (BusinessException e) {
             log.error("校验异常：{}", e.getMessage());
             return SystemResponse.fail(e.getMessage());
